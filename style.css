@@ -1,0 +1,38 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-left: 50px;
+  min-height: 100vh;
+}
+button {
+  border: .3rem solid black;
+  border-radius: .5rem;
+  margin: .75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: .75rem .5rem;
+  width: 6rem;
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  text-shadow: 0 0 .5rem black;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  background-color: rgba(0, 0, 0, 0.674);
+}
+
+p {
+  font-size: 18px;
+}
+
+#scoresBox {
+  width: 400px;
+  padding: 15px;
+  padding-top: 5px;
+  background-color: bisque;
+  border-radius: 15px;
+}

@@ -13,52 +13,70 @@ function getComputerChoice () {
 //compares player's choice with computer's choice and determines the winner
 function playRound(playerSelection, computerSelection) {
   if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
-    return "Draw! Play again if you dare!"
+    return "Draw! Keep playing if you dare!"
   }
   if (playerSelection.toLowerCase() === "rock"){
     if (computerSelection.toLowerCase() === "paper") {
-      return "You lose! Paper beats rock."
+      return "Paper beats rock. <font color='red'>You lose this round!</font>"
     }
     else {
-      return "You win! Rock beats scissors."
+      return "Rock beats scissors. <font color='green'>You win the round!</font>"
     }
   }
   if (playerSelection.toLowerCase() === "paper"){
     if (computerSelection.toLowerCase() === "scissors") {
-      return "You lose! Scissors beats paper."
+      return "Scissors beats paper. <font color='red'>You lose this round!</font>"
     }
     else {
-      return "You win! Paper beats rock."
+      return "Paper beats rock. <font color='green'>You win the round!</font>"
     }
   }
   if (playerSelection.toLowerCase() === "scissors"){
     if (computerSelection.toLowerCase() === "rock") {
-      return "You lose! Rock beats scissors."
+      return "Rock beats scissors. <font color='red'>You lose this round!</font>"
     }
     else {
-      return "You win! Scissors beats paper."
+      return "Scissors beats paper. <font color='green'>You win the round!</font>"
     }
   }
 }
 
-//play 5 rounds of rock, paper, scissors using the playRound and getComputerChoice functions
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-  for (let i=0; i<5; i++) {
-    playerSelection = prompt("Which do you choose (rock, paper, or scissors)?: ");
-    result = playRound(playerSelection, getComputerChoice());
-    console.log(result);
-    if (result.toLowerCase().includes("you win")) {
-      playerScore++;
-    }
-    if (result.toLowerCase().includes("you lose")) {
-      computerScore++;
-    }
+//play a round of rock, paper, scissors using the playRound and getComputerChoice functions
+function game(playerSelection) {
+  const playerScoreLbl = document.querySelector('#playerScoreLbl');
+  const computerScoreLbl = document.querySelector('#computerScoreLbl');
+  let playerScore = parseInt(playerScoreLbl.innerText);
+  let computerScore = parseInt(computerScoreLbl.innerText);
+
+  // d nothing if score limit reached
+  if (playerScore > 4 || computerScore > 4) {
+    return;
   }
-  //log the total scores and who wins
-  winner = playerScore>computerScore ? "Player" : "Computer";
-  winner = playerScore===computerScore ? "Draw!" : winner;
-  console.log(`Final score: ${playerScore} player - ${computerScore} computer`);
-  console.log(`Winner: ${winner}!`);
+
+  const resultTxt = document.querySelector('#roundTxt');
+  let result = playRound(playerSelection, getComputerChoice());
+  resultTxt.innerHTML = "<strong>" + result + "</strong>";
+
+  if (result.toLowerCase().includes("win")) {
+    playerScoreLbl.innerText = ++playerScore;
+  }
+  else if (result.toLowerCase().includes("lose")) {
+    computerScoreLbl.innerText = ++computerScore;
+  }
+
+  // display winner if game end
+  if (playerScore > 4 || computerScore > 4) {
+    let winner = playerScore > 4 ? "<font color='green'>Player</font>" : "<font color='red'>Computer</font>";
+    let winnerText = `<strong>Winner: ${winner}!</strong>`
+    winnerText += "<br><br>Refresh (F5) or click Reset to play again!"
+    resultTxt.innerHTML = winnerText;
+  }
+}
+
+// resets game scores and clears game texts
+function resetGame() {
+  document.querySelector('#playerScoreLbl').innerText = "0";
+  document.querySelector('#computerScoreLbl').innerText = "0";
+  document.querySelector('#roundTxt').innerText = "";
+  document.querySelector('#gameEndTxt').innerText = "";
 }

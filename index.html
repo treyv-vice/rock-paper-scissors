@@ -1,2 +1,36 @@
-<script src="rock-paper-scissors.js"></script>
-Open the console and run the game() command to play the game!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="rock-paper-scissors.js" defer></script>
+</head>
+<body>
+  <h1>Rock, Paper, Scissors</h1>
+  <p>Play against the computer. First to 5 points wins the game!</p>
+  <h2>Select a Move:</h2>
+  <button class="moveBtn">Rock</button>
+  <button class="moveBtn">Paper</button>
+  <button class="moveBtn">Scissors</button>
+
+  <p id="roundTxt"></p>
+
+  <h2>Scores:</h2>
+  <ul id="scoresBox">
+    <h3>Player: </h3>
+    <div id="playerScoreLbl">0</div>
+    <h3>Computer: </h3> 
+    <div id="computerScoreLbl">0</div>
+  </ul>
+  <button id="resetBtn">Reset</button>
+<script>
+  const moveButtons = document.querySelectorAll('.moveBtn');
+  moveButtons.forEach(button => button.addEventListener('click', () => game(button.innerText)));
+  const resetBtn = document.querySelector('#resetBtn');
+  resetBtn.addEventListener('click', () => resetGame());
+</script>
+</body>
+</html>
